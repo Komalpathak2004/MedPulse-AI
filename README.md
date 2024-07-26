@@ -1,5 +1,5 @@
 <h1>🩺 MedPulseAI - Your AI-Driven Path to Better Health 🌟</h1>
-<img src="static/images/img1.jpg" alt="MedPulseAI" style="max-width:100;height:auto;">
+<img src="static/images/img1.jpeg" alt="MedPulseAI" style="max-width:100;height:auto;">
 <h3>💡 Idea </h3>
 <br>
 Welcome to MedPulseAI, an innovative health-tech platform designed to revolutionize your well-being journey! Harnessing the power of machine learning, MedPulseAI offers a comprehensive suite of features to empower you with personalized health insights and recommendations.
