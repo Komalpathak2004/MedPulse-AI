@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicine Recommender System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.jpeg') }}" type="image/x-icon">
+</head>
+<body class="flex flex-col min-h-screen bg-cover bg-center" style="background-image: url('{{ url_for('static', filename='images/bg2.jpeg') }}');">
+    <header class="px-4 lg:px-6 h-20 flex items-center shadow-md bg-gradient-to-br from-blue-200 to-blue-100 relative">
+        <a href="https://medpulseai-ml.onrender.com/" class="flex items-center">
+            <img src="{{ url_for('static', filename='images/logo.jpeg') }}" alt="PredictMed Logo" class="h-10 w-10 rounded-full">
+            <h1 class="text-2xl font-bold text-purple-900 ml-2">MedPulseAI</h1>
+        </a>
+        <nav class="ml-auto flex items-center relative">
+            <!-- Toggle Button for Mobile -->
+            <button id="menu-toggle" class="lg:hidden text-blue-800 hover:text-blue-600 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-6 w-6">
+                    <path d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex gap-4 sm:gap-6 items-center relative">
+                <a class="text-sm font-medium text-blue-800 hover:underline hover:text-blue-600 transition-colors" href="https://medpulseai-ml.onrender.com/">Home</a>
+                <div class="relative">
+                    <button type="button" id="services-button" aria-haspopup="menu" aria-expanded="false" class="text-sm font-medium text-blue-800 hover:underline hover:text-blue-600 transition-colors flex items-center gap-2">
+                        <span>Services</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-800 transition-transform duration-300">
+                            <path d="m6 9 6 6 6-6"></path>
+                        </svg>
+                    </button>
+                    <div id="services-dropdown" class="absolute top-full left-0 mt-2 w-48 bg-purple-900 border border-gray-200 rounded-lg shadow-lg z-50 hidden">
+                        <a href="" class="block px-4 py-2 text-sm text-white hover:bg-purple-700">Alternative Medicine Recommendations</a>
+                        <a href="https://medpulseai-ml.onrender.com/therpy.html" class="block px-4 py-2 text-sm text-white hover:bg-purple-700">Age-Based Lifestyle Therapies</a>
+                        <a href="https://diabetesprediction-machinelearning.onrender.com/" class="block px-4 py-2 text-sm text-white hover:bg-purple-700">Predict Diabetes</a>
+                        <a href="https://diabetesprediction-machinelearning.onrender.com/" class="block px-4 py-2 text-sm text-white hover:bg-purple-700">Predict Heart Diseases</a>
+                        <a href="https://medpulseai-ml.onrender.com/Location%20Detector/index.html" class="block px-4 py-2 text-sm text-white hover:bg-purple-700">Find Nearby Hospitals</a>
+                        <a href="https://diabetesprediction-machinelearning.onrender.com/" class="block px-4 py-2 text-sm text-white hover:bg-purple-700">Predictive Health Analytics</a>
+                    </div>
+                </div>
+                <a class="text-sm font-medium text-blue-800 hover:underline hover:text-blue-600 transition-colors" href="contact.html">Contact</a>
+                <a class="inline-flex h-8 items-center justify-center rounded-full bg-purple-900 px-4 text-sm font-medium text-white shadow transition-colors hover:bg-purple-700 focus:outline-none" href="login.html">Login</a>
+            </div>
+
+            <!-- Mobile Dropdown Menu -->
+            <div id="mobile-menu" class="lg:hidden absolute top-14 right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg hidden z-50">
+                <a href="index.html" class="block px-4 py-2 text-sm text-blue-800 hover:bg-blue-200">Home</a>
+                <button type="button" id="mobile-services-button" class="w-full text-left px-4 py-2 text-sm text-blue-800 hover:bg-blue-200 flex items-center justify-between">
+                    Services
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-blue-800 transition-transform duration-300">
+                        <path d="m6 9 6 6 6-6"></path>
+                    </svg>
+                </button>
+                <div id="mobile-services-dropdown" class="hidden mt-2 bg-purple-900 z-50">
+                    <a href="" class="block px-4 py-2 text-sm text-white hover:bg-purple-700">Alternative Medicine Recommendations</a>
+                    <a href="https://medpulseai-ml.onrender.com/therpy.html" class="block px-4 py-2 text-sm text-white hover:bg-purple-700">Age-Based Lifestyle Therapies</a>
+                    <a href="https://diabetesprediction-machinelearning.onrender.com/" class="block px-4 py-2 text-sm text-white hover:bg-purple-700">Predict Diabetes</a>
+                    <a href="https://diabetesprediction-machinelearning.onrender.com/" class="block px-4 py-2 text-sm text-white hover:bg-purple-700">Predict Heart Diseases</a>
+                    <a href="https://medpulseai-ml.onrender.com/Location%20Detector/index.html" class="block px-4 py-2 text-sm text-white hover:bg-purple-700">Find Nearby Hospitals</a>
+                    <a href="https://diabetesprediction-machinelearning.onrender.com/" class="block px-4 py-2 text-sm text-white hover:bg-purple-700">Predictive Health Analytics</a>
+                </div>
+                <a href="https://medpulseai-ml.onrender.com/contact.html" class="block px-4 py-2 text-sm text-blue-800 hover:bg-blue-200">Contact</a>
+                <a href="https://medpulseai-ml.onrender.com/login.html" class="block px-4 py-2 text-sm text-blue-800 hover:bg-blue-200">Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div class="flex flex-col lg:flex-row items-center bg-white shadow-lg rounded-lg overflow-hidden max-w-5xl w-full">
+            <!-- Left Side: Image -->
+            <div class="lg:w-1/2 p-4">
+                <img src="{{ url_for('static', filename='images/pic1.jpeg') }}" alt="Medicine" class="w-full h-auto object-cover rounded-lg shadow-md">
+            </div>
+
+            <!-- Right Side: Form -->
+            <div class="lg:w-1/2 p-8">
+                <h2 class="text-3xl font-bold text-purple-900 mb-6">Medicine Recommender System</h2>
+                <form method="POST" style="background-color: #E0F7FA; padding: 2.5rem; border-radius: 0.375rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+                    <label for="medicine" class="block text-lg font-medium text-purple-900">Type your medicine name whose alternative is to be recommended:</label>
+                    <select id="medicine" name="medicine" class="block w-full mt-6 p-2 border border-gray-300 rounded-md">
+                        {% for medicine in medicines %}
+                            <option value="{{ medicine }}">{{ medicine }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" onclick="getRecommendations()" class="w-full bg-purple-900 text-white py-2 px-4 my-4 rounded-md hover:bg-purple-700 transition-colors">Recommend Medicine</button>
+                </form>
+                <ul style="list-style-type: disc; padding-left: 24px; color: #4A5568; font-family: 'Arial', sans-serif; font-size: 1rem; margin-top:24px;">
+                  {% for recommendation in recommendations %}
+                  <li style="margin-bottom: 8px; line-height: 1.6;">
+                      {{ recommendation }} - 
+                      <a href="https://pharmeasy.in/search/all?name={{ recommendation }}" target="_blank" style="color: #3182CE; text-decoration: none;" class="custom-link">Purchase</a>
+                  </li>
+                  {% endfor %}
+              </ul>       
+            </div>
+        </div>
+    </main>
+
+      <!-- FOOTER  -->
+      <!-- About Section -->
+      <section id="about" class="p-8 mt-0">
+        <div class="flex flex-col md:flex-row mt-8">
+          <div class="md:w-1/4">
+            <img src="{{ url_for('static', filename='images/pic2.jpeg') }}" alt="Medicine" class="w-full h-auto object-cover rounded-lg shadow-md">
+          </div>
+          <div class="md:w-3/4 md:pl-8">
+            <h2 class="text-3xl font-bold mb-4">About MedPulseAI</h2>
+            <div class="border-b border-gray-400 mb-4"></div>
+            <div class="flex flex-col md:flex-row">
+              <div class="md:w-1/3 mb-4 md:mb-0">
+                <div class="bg-purple-600 text-white rounded-full px-4 py-1 inline-block mb-2">What's MedPulseAI</div>
+                <p>MedPulseAI is an innovative health-tech platform harnessing the power of machine learning to empower individuals to take control of their well-being. It offers a comprehensive suite of features </p>
+              </div>
+              <div class="md:w-1/3 mb-4 md:mb-0">
+                <div class="bg-purple-600 text-white rounded-full px-7 py-1 inline-block mb-2">Our Goals</div>
+                <ul class="list-disc list-inside px-5">
+                  <li>Alternative Medicine Recommendations</li>
+                  <li>Age-Based Lifestyle Therapies</li>
+                  <li>Emergency Hospital Locator</li>
+                  <li>Predictive Health Analytics</li>
+                  <li>Predict Diseases With Accuracy</li>
+                </ul>
+              </div>
+              <div class="md:w-1/3">
+                <div class="bg-purple-600 text-white rounded-full px-4 py-1 inline-block mb-2">About Us</div>
+                <p>The platform provides users with alternative medicine recommendations, lifestyle therapy suggestions tailored to their age, predictive analytics for diabetes and heart disease, and real-time location-based services to find nearby hospitals in emergencies. </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    
+      <!-- Contact Section -->
+      <section id="contact" class="p-8">
+        <div class="mt-8">
+          <h2 class="text-3xl font-bold mb-4">Contact Us</h2>
+          <div class="border-b border-gray-400 mb-4"></div>
+          <div class="flex flex-col md:flex-row">
+            <div class="md:w-1/2 mb-4 md:mb-0">
+              <p class="font-bold text-purple-600">Email Support:</p>
+              <p>MedPulseAIsupport@gmail.com</p>
+            </div>
+            <div class="md:w-1/2">
+              <p class="font-bold text-purple-600">Phone:</p>
+              <p>+1-123-456-7890</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- JavaScript for Menu Toggle -->
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        document.getElementById('services-button').addEventListener('click', () => {
+            document.getElementById('services-dropdown').classList.toggle('hidden');
+        });
+
+        document.getElementById('mobile-services-button').addEventListener('click', () => {
+            document.getElementById('mobile-services-dropdown').classList.toggle('hidden');
+        });
+
+          document.addEventListener('DOMContentLoaded', function() {
+              const links = document.querySelectorAll('.custom-link');
+              links.forEach(link => {
+                  link.addEventListener('mouseover', function() {
+                      this.style.color = '#2B6CB0';
+                      this.style.textDecoration = 'underline';
+                  });
+                  link.addEventListener('mouseout', function() {
+                      this.style.color = '#3182CE';
+                      this.style.textDecoration = 'none';
+                  });
+              });
+          });
+    </script>
+</body>
+</html>
