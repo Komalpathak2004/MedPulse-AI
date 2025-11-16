@@ -1,4 +1,4 @@
-<h1>🩺 MedPulseAI - Your AI-Driven Path to Better Health 🌟</h1>
+<h1>🩺 PredictMed - Your AI-Driven Path to Better Health 🌟</h1>
 <img src="static/images/img1.jpeg" alt="MedPulseAI" style="max-width:100;height:auto;">
 <h3>💡 Idea </h3>
 <br>
